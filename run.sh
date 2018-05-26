@@ -1,3 +1,4 @@
 #!/bin/bash
-echo "hello world"
-echo "Nibba"
+echo "Start"
+sudo apt-get update
+sudo apt-get upgrade
