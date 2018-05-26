@@ -4,4 +4,4 @@ sudo apt-get update
 sudo apt-get upgrade
 
 
-sudo apt-get install feh htop ranger terminator i3 xorg
+sudo apt-get install feh htop ranger i3 xorg vim konsole
