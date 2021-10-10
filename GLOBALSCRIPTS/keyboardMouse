@@ -1,0 +1,98 @@
+#!/bin/bash
+
+#sudo evtest /dev/input/event2 | grep -E 'KEY_.*+' -o
+
+if [[ `pgrep -c "keyboardMouse"` -gt 1 ]]; then
+	exit 1
+fi
+
+up=0
+down=0
+left=0
+right=0
+mouseL=0;
+mouseR=0;
+echo launching!!!
+sudo evtest /dev/input/event6 | 
+	while IFS= read -r line
+	do
+		#echo "$line" | grep -E 'KEY_.*+' -o
+		key=`echo "$line" | grep -E 'KEY_\w+' -o`
+		value=${line: -1}
+		echo Key is $key set at value $value
+
+
+		case $key in
+			KEY_A) 
+				if [[ $value -gt 0 ]]; then
+					left=1;
+					#xdotool mousemove_relative -- -30 0;
+				else
+					left=0;
+				fi ;;
+			KEY_S)
+				if [[ $value -gt 0 ]]; then
+					up=1;
+					#xdotool mousemove_relative 0 -30;
+				else
+					up=0;
+				fi ;;
+			KEY_D)
+				if [[ $value -gt 0 ]]; then
+					down=1;
+					#xdotool mousemove_relative 0 +30;
+				else
+					down=0;
+				fi ;;
+			KEY_F)
+				if [[ $value -gt 0 ]]; then
+					right=1;
+					#xdotool mousemove_relative 30 0;
+				else
+					right=0;
+				fi ;;
+			KEY_W) 
+				if [[ $value -gt 0 ]]; then
+					mouseL=1
+					#xdotool click 1;
+				else
+					mouseL=0;
+				fi ;;
+			KEY_E) 
+				if [[ $value -gt 0 ]]; then
+					mouseR=1
+					#xdotool click 3;
+				else
+					mouseR=0
+				fi ;;		
+		esac
+
+		echo $left $up $down $right $mouseL $mouseR
+		echo $left $up $down $right $mouseL $mouseR > /home/a/Workspace/GLOBALSCRIPTS/controls
+		#echo $left $up $down $right > ./controls
+
+		#if [[ $up -eq 1 ]]; then
+			#xdotool mousemove_relative 0 -10;
+		#fi
+	done
+#cat ./dupe| xargs -n1 echo kokoszka!!!
+
+
+
+# if [[ "$#" -eq 666 ]]; then
+# 	case "$@" in
+# 	up)
+# 	xdotool mousemove_relative -- 0 -10
+# 		;;
+# 	down)
+# 	xdotool mousemove_relative 0 10
+# 		;;
+# 	left)
+# 	xdotool mousemove_relative -- -10 0
+# 		;;
+# 	right)
+# 	xdotool mousemove_relative 10 0
+# 		;;
+# 	esac
+# fi
+

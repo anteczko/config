@@ -1,0 +1,2 @@
+#!/bin/bash
+/home/a/Workspace/Keebie-master/keebie.py $@

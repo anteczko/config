@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# prototype of 3 dimensional workspace acess script fo i3wm
+#
+
+W=5
+M=2
+
+function index(){
+	ind=0;
+	if [[ $# -eq 3 ]]; then
+		let ind=M*$1
+
+		let ind+=M*W*$2
+
+		let ind+=M*W*W*$3
+	fi
+	echo $ind;
+}
+
+#index $@
+
+x=0
+y=0
+z=0
+
+#while true; do
+	#read -rsn1 input
+	
+	case "$input" in
+		"w") let y-=1;;
+		"s") let y+=1;;
+		"d") let x+=1;;
+		"a") let x-=1;;
+		"q") let z-=1;;
+		"e") let z+=1;;
+		*) echo "Key '$input' pressed!";;
+	esac	
+	echo "x=$x y=$y z=$z i=$(index x y z)"
+#done
+
+

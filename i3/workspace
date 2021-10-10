@@ -1,0 +1,29 @@
+#!/bin/bash
+
+
+noOfWorkspaces=10
+curr=$(i3-msg -t get_workspaces | jq -r 'map(select(.focused))[0].num') 
+
+mod=0
+
+if [[ curr -gt $noOfWorkspaces ]]; then
+    mod=$noOfWorkspaces;
+fi
+
+if [[ $# -eq 2 ]]; then
+    i3-msg move container to workspace $(( $mod + $1))
+    exit 1
+elif [[ $# -eq 1 ]]; then
+    if [[ curr -lt $noOfWorkspaces ]]; then
+        i3-msg workspace $(( $noOfWorkspaces + $1)), workspace $(( $1))
+        notify-send -t 300 Left
+    else
+        i3-msg workspace $(($1)), workspace $(( $noOfWorkspaces + $1))
+        notify-send -t 300 Right
+    fi
+    
+    exit 1
+else
+    echo $curr
+    exit 1
+fi

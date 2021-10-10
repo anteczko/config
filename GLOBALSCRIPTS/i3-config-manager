@@ -1,0 +1,70 @@
+# !/bin/bash
+# acthually that script manages i3 config and i3-config folder
+# functions are:
+# -b -backup (empty generates name that contains date and time)/ name 
+# -r -restore (restores last backuped based on file date)/ date /name 
+
+backup_name(){
+	echo i3-config-backup_`date +%d-%m-%Y_%T`;
+}
+
+backup(){
+	echo "Making backup using function!" $1 $2;
+	if [ "$#" == 1 ];then
+		echo "making backup with default filename '$(backup_name)' ";
+		rm -r /home/a/Workspace/wm/i3/backups/$(backup_name)
+		cp -r /home/a/.config/i3/ /home/a/Workspace/wm/i3/backups/$(backup_name)
+	elif [ "$#" == 2 ];then
+		echo "making backup with given name '$2'";
+		rm -r /home/a/Workspace/wm/i3/backups/$2
+		cp -r /home/a/.config/i3/ /home/a/Workspace/wm/i3/backups/$2
+	fi
+}
+
+delete(){
+	echo "Wiping entire i3-config!";
+	rm /home/a/.config/i3/*;
+}
+
+restore(){
+
+	if [ "$#" == 1 ];then
+		delete;
+		last=$(ls ~/Workspace/wm/i3/backups/ -t | head -1);
+		echo "copying last backup named '$last' as new i3-config folder";
+		cp /home/a/Workspace/wm/i3/backups/$last/* /home/a/.config/i3/ ;
+	elif [ "$#" == 2 ];then
+		#delete;
+
+		if [ -d "/home/a/Workspace/wm/i3/backups/$2" ];then
+			echo "Directory exist!";
+			delete;
+			echo "copying provided backup '$2' as i3 config";
+			cp /home/a/Workspace/wm/i3/backups/$2/* /home/a/.config/i3/;
+		else
+			echo "specified Dir doesn't exist!!!!";
+		fi
+
+		#echo "copying provided backup '$2' as i3 config";
+		#cp /home/a/Workspace/wm/i3/backups/$2/* /home/a/.config/i3/;
+	fi
+}
+
+if [ "$#" == 0 ];then
+	echo "List of configs in backup directory"
+	cd /home/a/Workspace/wm/i3/backups/
+	ls -1 -d ./*/
+elif [ "$#" -gt 0 ];then
+	echo "One argument specified!";
+
+	case "$1" in
+		-b|-backup)
+			backup $@;;
+		-r|-restore)
+			restore $@;
+			i3-msg restart;;
+		*)
+			echo "bad argument specified!";;
+	esac
+fi
+

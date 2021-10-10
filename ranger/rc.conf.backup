@@ -1,0 +1,41 @@
+copymap <UP>       l
+copymap <DOWN>     k
+copymap <LEFT>     j
+copymap <RIGHT>    ;
+
+map S shell $SHELL
+
+map t chain shell -f thunar;quit
+map T chain open_with thunar f;quit
+map nt shell -f thunar
+map nT open_with thunar f
+
+map x shell $SHELL
+map nx shell xfce4-terminal -x bash
+map X chain cd %s; shell $SHELL
+map nX chain cd %s; shell xfce4-terminal -x bash
+
+map nr shell -f xfce4-terminal -x ranger
+
+map gf cd ~/Pobrane
+map gd cd ~/Dokumenty
+map gs cd ~/Dokumenty/Sprawozdania
+map gi cd ~/Obrazy
+
+map gW cd ~/Workspace
+map gwr cd ~/Workspace/rofi
+map gww cd ~/Workspace/wm
+map gwg cd ~/Workspace/GLOBALSCRIPTS
+map gwS cd ~/Workspace/STM
+map gwsb cd ~/Workspace/STM/pendrive\ backup
+map gwsp cd ~/Workspace/STM/Projects
+
+map gwsL cd ~/Workspace/STM/Libraries
+map gwsl cd ~/Workspace/STM/Libraries/HD44780_STM32_HAL-master
+map gwst cd ~/Workspace/STM/Libraries/STM32-HD44780-USART-master
+
+map gC cd ~/.config
+map gci cd ~/.config/i3
+map gcc cd ~/.config/compton
+map gcR cd ~/.config/rofi
+map gcr cd ~/.config/ranger

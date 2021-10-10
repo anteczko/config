@@ -1,0 +1,47 @@
+#!/bin/bash
+
+#possible arguments
+#space, left, right
+
+previousID=`cat ./previousID`
+echo previous is $previousID
+
+
+currentID=$( xdotool getactivewindow )
+
+backupID=$( xdotool getactivewindow )
+echo $backupID
+echo "$backupID" > ./previousID
+
+destinationID=$( xdotool search --onlyvisible --name 'Unity 2019' )
+echo $destinationID
+
+
+if [[ "$currentID" -eq "$destinationID" ]]; then
+	sleep 0.1
+	xdotool getactivewindow key ctrl+p
+	sleep 0.1
+	xdotool windowactivate $previousID
+else
+	xdotool windowactivate $destinationID
+
+	#sleep for little
+	sleep 0.1
+	xdotool getactivewindow key ctrl+p
+fi
+
+
+	#focusing into youtube
+	#xdotool windowactivate $destinationID
+
+	#sleep for little
+	#sleep 0.05
+
+	#echo one argument!
+	
+	#xdotool getactivewindow key ctrl+p
+
+	#going back to previous window
+#	xdotool windowactivate $backupID
+
+#xdotool windowactivate `xdotool search --onlyvisible --name 'youtube'`

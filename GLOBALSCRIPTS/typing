@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [[ "$#" -eq 1 ]];then
+	if [[ "$1" == "redo" ]]; then
+		echo Redo!
+		xdotool mousemove 1200 630
+		xdotool click 1
+	elif [[ "$1" == "next" ]]; then
+		xdotool mousemove 1300 630
+		xdotool click 1
+	elif [[ "$1" == "next2" ]]; then
+		xdotool mousemove 1300 760
+		xdotool click 1
+	fi
+fi
+

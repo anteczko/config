@@ -1,0 +1,142 @@
+#!/bin/bash
+
+
+#functions
+
+eq () {
+	let x=740+$1*54
+	let y=560+$2*54
+	echo moving mouse to $x $y
+	xdotool mousemove $x $y
+}
+
+donkey () {
+	let x=956+$1*54
+	let y=400-30+$2*54
+	echo moving mouse to $x $y
+	xdotool mousemove $x $y
+}
+
+check () {
+	for j in {0..2}
+	do
+		for i in {0..8}	
+		do
+			eq $i $j
+			sleep 0.1
+		done
+	done
+}
+
+shiftClick () {
+	xdotool keydown shift click 1 click 1 keyup shift
+}
+
+eqToDon () {
+	if [[ "$#" -eq 0 ]]; then
+		for j in {2..0}
+		do
+			for i in {8..0}	
+			do
+				eq $i $j
+				shiftClick
+				#sleep 0.1
+			done
+		done
+	else
+		let my=$1/8
+		let mx=$1%9
+		if [[ "$mx" -gt 7 ]]; then
+			let x=x-8
+		fi
+		echo x=$mx y=$my
+
+		for j in {0..$my}
+		do
+			for i in {0..$mx}	
+			do
+				eq $i $j
+				#shiftClick
+				sleep 0.1
+			done
+		done
+
+	fi
+}
+
+yeet () {
+	donkey -4 0
+	xdotool click 1
+	donkey -4 -2
+	xdotool click 1
+}
+
+lookUp () {
+	xdotool keydown Up
+	sleep 3
+	xdotool keyup Up	
+}
+
+lookStraight () {
+	xdotool keydown Down
+	sleep 0.8
+	xdotool keyup Down	
+}
+
+yeetEq () {
+	for j in {2..0}
+		do
+			for i in {8..0}	
+			do
+				eq $i $j
+				xdotool key q
+				xdotool key q
+			done
+		done
+
+}
+
+
+#functionsEND
+
+destinationID=$( xdotool search --onlyvisible --name 'Minecraft' )
+echo $destinationID
+xdotool windowactivate $destinationID
+
+#xdotool mousemove 740 560
+#xdotool mousemove 1180 670
+
+#check
+#eq 8 2
+#xdotool click 1
+#donkey 4 2
+#xdotool click 1
+
+#eq 0 0
+#xdotool keydown shift click 1 click 1 keyup shift
+
+#for r in {1,1,2,4,8,15}
+#do
+#	eqToDon
+#	yeet
+#	xdotool key e
+#	xdotool key e
+#	sleep 2
+#done
+
+
+
+#lookUp
+#yeet
+#sleep 3
+#
+#lookStraight
+yeetEq
+yeetEq
+
+#put saddle
+#eq 0 0
+#xdotool click 1
+#donkey -4 0
+#xdotool click 1
+

@@ -1,0 +1,10 @@
+Wifi settings
+nmtui
+Volume control alsamixer
+alsamixer
+Logout
+pkill -KILL -u a
+Shutdown
+shutdown now
+Reboot
+reboot

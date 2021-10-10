@@ -1,0 +1,2 @@
+#!/bin/bash
+java -jar ~/Gry/TLauncher/TLauncher-2.75/TLauncher-2.75.jar

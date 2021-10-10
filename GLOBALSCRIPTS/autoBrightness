@@ -1,0 +1,45 @@
+#!/bin/bash
+
+
+#option to manually set brigtness for debgging purposes
+if [[ "$#" -eq 1 ]]; then
+	var=$1
+	echo argument specified $1
+else
+	var=`date +"%H"`
+fi
+
+echo var is $var
+
+
+while :
+do
+	#starting function calc
+	if [[ $var -gt 4 && $var -lt 20 ]]; then
+		#here we calc variable of brightness
+		echo calculating function!
+
+		var=$((var-13))
+		echo decrased var is $var
+		
+		level=`echo - | awk '{print cos(('$var' * 0.2))}'`
+		echo levels are $level
+		#level € <0;1> 
+
+		bright=`echo | awk '{print '$level' * 80}'`
+
+		bright=`echo | awk '{ printf("%.0f\n", '$bright'); }'`
+
+		bright=$(( $bright + 25 ))
+		echo $bright
+
+		/home/a/Workspace/GLOBALSCRIPTS/brightness $bright
+	else
+		echo just 0!
+		/home/a/Workspace/GLOBALSCRIPTS/brightness 25
+	fi
+
+	#brightness $var
+
+	sleep 600
+done

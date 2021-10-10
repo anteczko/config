@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#possible arguments
+#space, left, right
+
+backupID=$( xdotool getactivewindow )
+echo $backupID
+
+destinationID=$( xdotool search --onlyvisible --name 'youtube' )
+echo $destinationID
+
+if [[ "$#" -eq 1 ]]; then
+	#focusing into youtube
+	xdotool windowactivate $destinationID
+
+	#sleep for little
+	sleep 0.05
+
+	echo one argument!
+	
+	case "$1" in
+		space) xdotool key space;;
+		left) xdotool key Left;;
+		right) xdotool key Right;;
+		default)echo undefined key pressed!;;
+	esac
+
+	#going back to previous window
+	xdotool windowactivate $backupID
+fi
+
+#xdotool windowactivate `xdotool search --onlyvisible --name 'youtube'`

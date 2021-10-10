@@ -1,0 +1,197 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+*{
+--marg: 0 px;
+    
+}
+
+#navigator-toolbox {
+  margin-top: 0;
+  overflow: hidden;
+  
+  -moz-box-direction: reverse;
+}
+
+ #navigator-toolbox:hover {
+   height: auto;
+   margin-bottom: 0px;
+   opacity: 1;
+   overflow: extend;
+}
+
+#main-window:hover *{
+  color:red !important;
+}
+
+
+#navigator-toolbox:-moz-window-inactive{
+
+}
+
+#navigator-toolbox:-moz-window-active {
+  margin-top: 100px;
+  
+}
+
+#toolbar-items{
+  
+}
+
+#main-menubar{
+  
+}
+
+#personal-bookmarks{
+ 
+}
+
+
+#nav-bar {
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+#nav-bar-customization-target{
+  
+
+}
+
+#PersonalToolbar {
+  margin-top:var(--marg) ;
+  margin-bottom: 0px;
+  
+}
+
+
+
+#menubar-items{
+  
+}
+#main-menubar{
+  opacity: 0%;
+}
+#main-menubar:hover{
+  opacity: 100%;
+}
+#TabsToolbar {
+  /*
+   -moz-box-ordinal-group:0 !important; 
+  */
+  -moz-box-ordinal-group: 0!important; 
+  
+  
+}
+
+
+
+
+#titlebar{
+  -moz-box-ordinal-group: 2!important; 
+  margin-top:-8px;
+  max-height: 40px;
+}
+#PersonalToolbar{
+   -moz-box-ordinal-group: 0 !important; 
+  
+}
+#nav-bar { 
+  -moz-box-ordinal-group: 0 !important;
+  
+  
+  padding-top: 0px;
+  
+  margin-top:-8px;
+  margin-bottom:-6px;
+  
+  position:revert !important;
+}
+
+
+#PersonalToolbar[collapsed="false"]{ 
+ margin-top: -60px;
+  
+}
+#PersonalToolbar[collapsed="true"]{ 
+  margin-top:0px;
+  visibility: visible;
+  display: block;
+  
+}
+#PersonalToolbar *{
+   display: none;
+  height: 100px !important;
+}
+#toolbar-menubar{
+
+}
+
+.tabbrowser-tab{
+  position: fixed !important;
+  bottom: 0px !important;
+  width: flex !important;
+  max-height: 30px;
+}
+
+.tabbrowser-tab[selected] .tab-content{
+  background-color:#ffff99 !important;
+  color:black !important;
+  font-weight: bold;
+
+max-width: 100% !important;
+  min-width: 100px !important;
+}
+
+.tabbrowser-tab[fadein]:not([pinned]) {
+max-width: 100% !important;
+  min-width: 100px !important;
+}
+
+/* Hide "Tree Style Tabs" sidebar header */
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+    display:none;
+}
+
+/* Hide splitter, when using Tree Style Tab. */
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] + #sidebar-splitter {
+  display: none !important;
+}
+/* Hide sidebar header, when using Tree Style Tab. */
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+  visibility: collapse;
+}
+
+
+/*
+.tabbrowser-tab {
+  -moz-box-flex: 1 !important; 
+  text-align: center !important;
+}
+
+
+
+ .tabbrowser-tab:not([selected]) {
+  min-width: 40px !important;
+  max-width: 40px !important;
+}
+
+.tabbrowser-tab:not([selected]) .tab-icon-sound{
+  display: none;
+}
+.tabbrowser-tab[selected]{
+  min-width: 150px !important;
+  max-width: 2500px !important;
+}
+
+.tabbrowser-tab:not([selected]) .tab-label-container{
+  opacity: 0 !important;
+  min-width: 0px !important;
+  display:none
+}
+
+.tabbrowser-tab:not([selected]) .tab-close-button{
+  display: none;
+}
+
+*/
+
+/* Fx65+ Address bar - Reduce height */

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+
+#functions
+
+move () {
+	let x=740+$1*48
+	let y=560+$2*36
+	echo moving mouse to $x $y
+	xdotool mousemove $x $y
+}
+
+#functionsEND
+
+destinationID=$( xdotool search --onlyvisible --name 'Minecraft' )
+echo $destinationID
+xdotool windowactivate $destinationID
+
+xdotool mousemove 740 560
+#xdotool mousemove 1180 670
+
+move 3 3

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ "$#" -eq 0 ]]; then
+	xrandr --output DVI-I-0 --brightness 1; xrandr --output HDMI-0 --brightness 1
+elif [[ "$#" -eq 1 ]]; then
+	if [[ "$1" -gt 20 && "$1" -lt 160 ]]; then
+		temp=`printf %f "$((10**3 * $1/100))e-3"`
+		echo $temp
+		xrandr --output DVI-I-0 --brightness $temp
+		xrandr --output HDMI-0 --brightness $temp
+	else
+		xrandr --output DVI-I-0 --brightness 1; xrandr --output HDMI-0 --brightness 1
+	fi
+fi
+

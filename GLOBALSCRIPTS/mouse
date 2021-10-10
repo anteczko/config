@@ -1,0 +1,101 @@
+#!/bin/bash
+
+#if [[ `pgrep -c "keyboardMouse"` -eq 0 ]]; then
+echo "a" | sudo -S /home/a/Workspace/GLOBALSCRIPTS/keyboardMouse
+	#/home/a/Workspace/GLOBALSCRIPTS/keyboardMouse
+#fi
+
+if [[ `pgrep -c "mouse"` -gt 2 ]]; then
+	exit 1
+fi
+
+sp=6
+
+mod=0;
+delta=0;
+maxSpeed=60;
+
+up=0;
+down=0;
+left=0;
+right=0;
+mouseL=0;
+mouseR=0;
+
+while :
+do
+	text=$(cat /home/a/Workspace/GLOBALSCRIPTS/controls)
+
+	if [[ $mod -lt 10 ]]; then
+		delta=0;
+		((mod=mod+1))
+	else
+		delta=1
+		mod=0
+	fi
+	
+	if [[ ${text:0:1} -gt 0 ]]; then
+		#echo moving left!
+		if [[ $left -lt $maxSpeed ]]; then
+			((left=left+delta));
+		fi
+		xdotool mousemove_relative -- -$left 0
+		#xdotool mousemove_relative -- -$sp 0
+	else
+		left=0
+	fi
+
+	if [[ ${text:2:1} -gt 0 ]]; then
+		#echo moving up!
+		if [[ $up -lt $maxSpeed ]]; then
+			((up=up+delta));
+		fi
+		xdotool mousemove_relative -- 0 -$up
+		#xdotool mousemove_relative -- 0 -$sp
+	else
+		up=0
+	fi
+
+	if [[ ${text:4:1} -gt 0 ]]; then
+		#echo moving down!
+		if [[ $down -lt $maxSpeed ]]; then
+			((down=down+delta));
+		fi
+		xdotool mousemove_relative 0 $down
+		#xdotool mousemove_relative 0 $sp
+	else
+		down=0
+	fi
+
+	if [[ ${text:6:1} -gt 0 ]]; then
+		#echo moving right!
+		if [[ $right -lt $maxSpeed ]]; then
+			((right=right+delta));
+		fi
+		xdotool mousemove_relative $right 0
+		#xdotool mousemove_relative $sp 0
+	else
+		right=0
+	fi
+
+	if [[ ${text:8:1} -gt 0 ]]; then
+		#xdotool click 1;
+		echo 1;
+	else
+		mouseL=0
+	fi
+
+	if [[ ${text:10:1} -gt 0 ]]; then
+		#xdotool click 3;
+		#xdotool key e;
+		echo 3;
+	else
+		mouseR=0
+	fi
+
+	echo $left $up $down $right $mouseL $mouseR
+	sleep 0.001
+done
+
+
+

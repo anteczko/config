@@ -1,0 +1,353 @@
+# Experimental i3 config file #
+# set mod key to win key
+set $mod Mod4
+
+#ain't need titlebars
+font pango:monospace 0
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
+exec --no-startup-id ifdown eth0
+exec --no-startup-id ifup eth0
+
+#fix webcam and droidcam
+exec --no-startup-id echo a | sudo -S modprobe v4l2loopback_dc
+
+#authentication manager enable
+#exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+#auto control brightness
+#exec --no-startup-id watch -n 300 autoBrightness
+#exec_always --no-startup-id /home/a/Workspace/GLOBALSCRIPTS/autoBrightness
+
+# Use pactl to adjust volume in PulseAudio.
+# bold of You to assume that my keyboard even heve 'music keys'
+# add some alsa-mixer binds later
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec xfce4-terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+#bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+z focus child
+
+
+###################################
+# Custom things
+###################################
+
+#special moving up and down to workspaces
+bindsym $mod+i exec "/home/a/.config/i3/workspace+- up"
+bindsym $mod+u exec "/home/a/.config/i3/workspace+- down"
+
+# switch to workspace
+bindsym $mod+1 exec "~/.config/i3/workspace 1"
+bindsym $mod+2 exec "~/.config/i3/workspace 2"
+bindsym $mod+3 exec "~/.config/i3/workspace 3"
+bindsym $mod+4 exec "~/.config/i3/workspace 4"
+bindsym $mod+5 exec "~/.config/i3/workspace 5"
+bindsym $mod+6 exec "~/.config/i3/workspace 6"
+bindsym $mod+7 exec "~/.config/i3/workspace 7"
+bindsym $mod+8 exec "~/.config/i3/workspace 8"
+bindsym $mod+9 exec "~/.config/i3/workspace 9"
+bindsym $mod+0 exec "~/.config/i3/workspace 10"
+
+# move focused container to workspace
+bindsym $mod+Shift+1 exec "~/.config/i3/workspace 1 move"
+bindsym $mod+Shift+2 exec "~/.config/i3/workspace 2 move"
+bindsym $mod+Shift+3 exec "~/.config/i3/workspace 3 move"
+bindsym $mod+Shift+4 exec "~/.config/i3/workspace 4 move"
+bindsym $mod+Shift+5 exec "~/.config/i3/workspace 5 move"
+bindsym $mod+Shift+6 exec "~/.config/i3/workspace 6 move"
+bindsym $mod+Shift+7 exec "~/.config/i3/workspace 7 move"
+bindsym $mod+Shift+8 exec "~/.config/i3/workspace 8 move"
+bindsym $mod+Shift+9 exec "~/.config/i3/workspace 9 move"
+bindsym $mod+Shift+0 exec "~/.config/i3/workspace 10 move"
+
+#assign workspaces to monitors
+workspace 1 output HDMI-0
+workspace 2 output HDMI-0
+workspace 3 output HDMI-0
+workspace 4 output HDMI-0
+workspace 5 output HDMI-0
+workspace 6 output HDMI-0
+workspace 7 output HDMI-0
+workspace 8 output HDMI-0
+workspace 9 output HDMI-0
+workspace 10 output HDMI-0
+
+workspace 11 output DVI-I-0
+workspace 12 output DVI-I-0
+workspace 13 output DVI-I-0
+workspace 14 output DVI-I-0
+workspace 15 output DVI-I-0
+workspace 16 output DVI-I-0
+workspace 17 output DVI-I-0
+workspace 18 output DVI-I-0
+workspace 19 output DVI-I-0
+workspace 20 output DVI-I-0
+
+
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)-
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+
+
+
+
+
+#that function is very secret, can merge two moniotors into one
+#fake-outputs 3840x1200+0+0
+
+### Execs and Initialization ###
+#exec_always feh --bg-tile ./Obrazy/Wallpapers/tiled/inverted.gif 
+#exec_always "compton --config ~/.config/conpton/compton.conf"
+exec_always killall compton
+exec_always compton --config ~/.config/compton/compton.conf
+exec_always compton --config ~/.config/compton/compton.conf
+exec_always xsetroot -solid "#000000"
+#exec_always feh --bg-tile ./Obrazy/white.png
+exec_always feh --bg-tile ./Obrazy/grey.png
+
+for_window [class="^.*"] border pixel 2
+
+gaps inner 0
+gaps outer 0
+
+# class                 border  bground text    indicator child_border
+client.focused          #989941 #717726 #FFFFFF #F0F42A   #777129
+client.focused_inactive #000000 #000000 #FFFFFF #000000   #000000
+client.unfocused        #000000 #000000 #000000 #000000   #000000
+client.urgent           #000000 #900000 #FFFFFF #900000   #900000
+client.placeholder      #000000 #000000 #FFFFFF #000000   #000000
+client.background       #FFFFFF
+
+#bindsym $mod+y exec "compton --config ~/.config/compton/compton.conf"
+
+#bindsym $mod+Shift+greater move workspace to output left
+#bindsym $mod+Shift+less move workspace to output right
+
+#########################################
+#	Experimental stuff here		#
+#########################################
+
+#set Your monitors names here!!!
+set $monitor_left DVI-I-0
+set $monitor_right HDMI-0
+
+#experimental for testing purposes
+#bindsym $mod+less focus output $monitor_left
+#bindsym $mod+greater focus output $monitor_right
+
+#focuses left/right monitor and changes workspace on that monitor
+#bindsym $mod+Shift+less focus output $monitor_left; workspace 2
+#bindsym $mod+Shift+greater focus output $monitor_right; workspace 2
+
+##extended exmaple
+#bindsym $mod+Shift+u focus output $monitor_left; workspace 1
+#bindsym $mod+Shift+i focus output $monitor_left; workspace 2
+#bindsym $mod+Shift+o focus output $monitor_right; workspace 11
+#bindsym $mod+Shift+p focus output $monitor_right; workspace 12
+
+bindsym $mod+g exec rofi -show drun -matching fuzzy
+bindsym $mod+Shift+s sticky toggle
+
+bindsym $mod+d exec "dmenu_run -nf '#BBBBBB' -nb '#222222' -sb '#005577' -sf '#EEEEEE' -fn 'monospace-10'
+bindsym $mod+y exec xfce4-terminal -x ranger
+bindsym --release $mod+Shift+y exec xfce4-terminal -x ranger && i3-msg "[id=$(xdotool getactivewindow)] floating enable"
+bindsym $mod+n exec firefox
+bindsym --release $mod+Shift+Return exec xfce4-terminal -x bash && i3-msg "[id=$(xdotool getactivewindow)] floating enable"
+
+#bindsym $mod+t exec tilda -c alsamixer && i3-msg "[id=$(xdotool getactivewindow)] floating enable"
+bindsym $mod+t exec terminator -x alsamixer
+for_window [class="Terminator"] floating enable
+
+bindsym $mod+p exec /home/a/Workspace/GLOBALSCRIPTS/rofify /home/a/Workspace/GLOBALSCRIPTS/panel_commands
+
+#bindsym Print exec /home/a/Obrazy/Labki/Gry/screen.sh
+#bindsym Print --release exec scrot -s /home/a/Dokumenty/Sprawozdania/Technologie\ multimedialne/scrots/scr.png
+#bindsym Pause --release exec scrot -u /home/a/Dokumenty/Sprawozdania/Technologie\ multimedialne/scrots/scr.png
+#bindsym Pause exec /home/a/Workspace/GLOBALSCRIPTS/rofify /home/a/Workspace/rofi/numpad -auto-select
+#bindsym Scroll_Lock --release exec scrot -s /home/a/Obrazy/Wyklady/ICZKOM/wyk.png
+#bindsym Pause --release exec scrot -u /home/a/Obrazy/Wyklady/ICZKOM/wyk.png
+#bindsym Pause --release exec scrot -u /home/a/Obrazy/Wyklady/PAI/wyk.png
+
+mouse_warping none
+
+#bindsym Scroll_Lock -release exec scrot -s /home/a/Dokumenty/Sprawozdania/Technologie\ multimedialne/Prezentacja/zdjecia/scrot.png
+
+# bindsym KP_Home exec /home/a/Workspace/GLOBALSCRIPTS/youtube-control left
+# bindsym KP_Up exec /home/a/Workspace/GLOBALSCRIPTS/youtube-control space
+# bindsym KP_Prior exec /home/a/Workspace/GLOBALSCRIPTS/youtube-control right
+
+#bindsym KP_Right exec /home/a/Workspace/GLOBALSCRIPTS/slajdy cut
+#bindsym KP_Begin exec /home/a/Workspace/GLOBALSCRIPTS/slajdy window
+
+#bindsym KP_Left exec /home/a/Workspace/GLOBALSCRIPTS/keyboardMouse left
+#bindsym KP_Begin exec /home/a/Workspace/GLOBALSCRIPTS/keyboardMouse down
+#bindsym KP_Right exec /home/a/Workspace/GLOBALSCRIPTS/keyboardMouse up
+
+#bindsym Pause exec /home/a/Workspace/GLOBALSCRIPTS/unityClickPlay
+
+#exec --no-startup-id watch -n 60 ~/Workspace/GLOBALSCRIPTS/autoBrightness
+
+#bindsym Print exec /home/a/Workspace/GLOBALSCRIPTS/youtube-control left
+#bindsym Scroll_Lock exec /home/a/Workspace/GLOBALSCRIPTS/youtube-control space
+#bindsym Pause exec /home/a/Workspace/GLOBALSCRIPTS/youtube-control right
+
+#bindsym --release Pause exec scrot -u /home/a/Dokumenty/Sprawozdania/Gry\ mobilne\ -\ projekt/scrots/shot.png
+#bindsym --release Pause exec scrot -u /home/a/Dokumenty/Sprawozdania/Gry\ mobilne\ -\ projekt/scrots/shot.png
+#bindsym --release Pause exec scrot -s /home/a/Dokumenty/Sprawozdania/Projektowanie\ i\ programowanie\ gier/scrots/scr.png
+
+bindsym --release Pause exec scrot -s /home/a/Dokumenty/Sprawozdania/Zawansowane\ programowanie\ obiektowe/scrots/scr.png
+#bindsym Print exec xdotool windowactivate `xdotool search --onlyvisible --name 'ProjektPai'`
+#bindsym Scroll_Lock exec sleep 0.3 && xdotool getactivewindow key shift+F10
+# bindsym Pause exec /home/a/Workspace/GLOBALSCRIPTS/youtube-control right
+
+# bindsym Print exec /home/a/Workspace/GLOBALSCRIPTS/typing redo
+# bindsym Scroll_Lock exec /home/a/Workspace/GLOBALSCRIPTS/typing next
+# bindsym Pause exec /home/a/Workspace/GLOBALSCRIPTS/typing next2
+
+bindsym Menu exec /home/a/Workspace/GLOBALSCRIPTS/mouse; mode "mouse"
+#bindsym Menu mode "mouse";
+bindsym Menu --release mode "default"
+
+mode "mouse" {
+	bindsym r exec firefox	
+	bindsym --release r exec xfce4-terminal
+
+	bindsym --release w exec xdotool click 1
+	bindsym --release e exec xdotool click 3
+
+	bindsym a exec echo;
+	bindsym s exec echo;
+	bindsym d exec echo;
+	bindsym f exec echo;
+
+#	bindsym Escape mode "default"
+#	bindsym Return mode "default"
+	#bindsym Menu mode "default"
+	bindsym Menu exec pkill "mouse"; mode "default"
+	#bindsym Menu --release exec pkill "mouse"; mode "default"
+	#bindsym Menu exec pkill "mouse"; mode "default"
+	bindsym Escape exec pkill "mouse"; mode "default"
+}
+
+#bindsym grave exec xdotool key Caps_Lock
+#bindsym --release grave exec xdotool key Caps_Lock; exec xdotool getwindowfocus windowfocus --sync type ' ' 
+
+#bindsym grave exec firefox; exec xfce4-terminal
+#bindsym Space exec xdotool key space
+#bindsym --release space exec xdotool key space
+
+#bindsym Menu+a exec python3 /home/a/Workspace/tiler/tiler left
+#bindsym Menu+f exec python3 /home/a/Workspace/tiler/tiler right
+#bindsym Menu+s exec python3 /home/a/Workspace/tiler/tiler up
+#bindsym Menu+d exec python3 /home/a/Workspace/tiler/tiler down
+
+#bindsym --release Menu exec xdotool key End
+##bindsym Menu mode "tiler"
+#mode "tiler" {
+#	bindsym --release a exec python3 /home/a/Workspace/tiler/tiler.py left
+#	bindsym --release f exec python3 /home/a/Workspace/tiler/tiler.py right
+#	bindsym --release s exec python3 /home/a/Workspace/tiler/tiler.py up
+#	bindsym --release d exec python3 /home/a/Workspace/tiler/tiler.py down
+#
+#	bindsym --release Menu mode "default"
+#	bindsym Menu mode "default"
+#	bindsym Escape mode "default"
+#}
+

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+curr=$(i3-msg -t get_workspaces | jq -r 'map(select(.focused))[0].num') ;
+
+if [[ $curr -gt 10 ]]; then
+	let curr=curr-10;
+fi
+
+
+if [[ ($1 == 'up') && ($curr -lt 10) ]]; then
+	let curr=curr+1;
+elif [[ ($1 == 'down') && ($curr -gt 1) ]]; then
+	let curr=curr-1;
+fi
+
+~/.config/i3/workspace $curr;
+
+notify-send -t 300 $curr;
+
+echo $curr;

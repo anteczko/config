@@ -1,0 +1,27 @@
+Programs to install:
+-i3wm
+ -i3 config
+ -i3's workspace changer
+-rofi
+ -rofify script
+-ranger
+ -create empty ranger config
+-compton
+ -simple config
+-sxhkd
+(for DE-agnostic keybinds)
+ -rofi
+ -controls (volume, etc)
+ -
+
+Custom configs:
+-firefox:
+ -userchromecss
+ -vim like plugins
+  -vimium
+   -vimum config
+ -startpage
+-vim and vim plugins for:
+ -VS code
+
+

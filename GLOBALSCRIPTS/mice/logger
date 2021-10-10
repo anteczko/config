@@ -1,0 +1,85 @@
+#!/bin/bash
+echo hello world!!!
+
+echo "" > ./keys
+
+sudo evtest /dev/input/event6 |
+	while IFS= read -r line
+	do
+		#line=`echo $line | grep -E '(?<=KEY_).+' -o`
+		line=`echo $line | grep -Po '(?<=KEY_).*'`
+		if [[ ! -z $line ]]; then
+			key=${line:0:1}
+			val=${line: -1}
+			#echo "Key$key value$val"
+			#echo $line
+			echo "$key $val" >> ./keys
+		fi
+	done &
+
+test="e"
+
+hori=0
+vert=0
+
+spd=25
+decel=5
+
+while [[ $test != q ]]
+do
+	#sleep 0.001
+	clear
+	#cat ./keys | sort | uniq
+	#echo waiting!
+	#read -n 1 -t 0.00001 test
+
+
+	left=`cat ./keys | sort | uniq | grep -ao 'A\ [12]' | wc -l`
+	if [[ $left -gt 0 ]]; then
+		hori=$((hori-left*spd))
+	fi
+
+	right=`cat ./keys | sort | uniq | grep -ao 'F\ [12]' | wc -l`
+	if [[ $right -gt 0 ]]; then
+		hori=$((hori+right*spd))
+	fi
+
+
+	if [[ $right -eq 0 && $left -eq 0 ]]; then
+		if [[ $hori -ge -$decel && $hori -le $decel ]]; then
+			hori=0
+		elif [[ $hori -lt 0 ]]; then
+			hori=$((hori+decel))
+		elif [[ $hori -gt 0 ]]; then
+			hori=$((hori-decel))
+		fi
+	fi
+
+	up=`cat ./keys | sort | uniq | grep -ao 'D\ [12]' | wc -l`
+	if [[ $up -gt 0 ]]; then
+		vert=$((vert-up*spd))
+	fi
+
+	down=`cat ./keys | sort | uniq | grep -ao 'S\ [12]' | wc -l`
+	if [[ $down -gt 0 ]]; then
+		vert=$((vert+down*spd))
+	fi
+
+	if [[ $up -eq 0 && $down -eq 0 ]]; then
+		if [[ $vert -ge -$decel && $vert -le $decel ]]; then
+			vert=0
+		elif [[ $vert -lt -$decel ]]; then
+			vert=$((vert+decel))
+		elif [[ $vert -gt $decel ]]; then
+			vert=$((vert-decel))
+		fi
+	fi
+
+
+	echo "" > ./keys
+	echo moving mouse by -- $hori $vert!!!
+	xdotool mousemove_relative -- $hori $vert
+done
+
+
+sudo pkill evtest
