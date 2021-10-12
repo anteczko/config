@@ -1,0 +1,104 @@
+#
+# wm independent hotkeys
+#
+
+# terminal emulator
+Pause
+	xfce4-terminal
+Scroll_Lock
+	firefox
+Print
+	rofi -show run -matching fuzzy
+ 
+#close window
+super + shift + q
+	xdotool windowquit `xdotool getactivewindow`
+
+#terminal
+super + Return
+	xfce4-terminal
+#programs
+super + b
+	firefox
+super + y
+	xfce4-terminal -x ranger
+
+#workspaces
+super + u
+	xdotool set_desktop --relative -- -1
+super + i
+	xdotool set_desktop --relative 1
+
+#move focus with hjkl keys
+super + h
+        python3 /home/a/Workspace/tiler/tiler.py focus left
+super + l
+        python3 /home/a/Workspace/tiler/tiler.py focus right
+super + k
+        python3 /home/a/Workspace/tiler/tiler.py focus up
+super + j
+        python3 /home/a/Workspace/tiler/tiler.py focus down
+
+#move windows wth hjkl keys
+super + shift + h
+        python3 /home/a/Workspace/tiler/tiler.py move left
+super + shift + l
+        python3 /home/a/Workspace/tiler/tiler.py move right
+super + shift + k
+        python3 /home/a/Workspace/tiler/tiler.py move up
+super + shift + j
+        python3 /home/a/Workspace/tiler/tiler.py move down
+
+#resize windows
+super + control + h
+        python3 /home/a/Workspace/tiler/tiler.py resize left
+super + control + l
+        python3 /home/a/Workspace/tiler/tiler.py resize right
+super + control + k
+        python3 /home/a/Workspace/tiler/tiler.py resize up
+super + control + j
+        python3 /home/a/Workspace/tiler/tiler.py resize down
+
+#special
+super + n
+        python3 /home/a/Workspace/tiler/tiler.py borders
+super + g
+        python3 /home/a/Workspace/tiler/tiler.py tiles
+super + f
+        python3 /home/a/Workspace/tiler/tiler.py yeet
+
+#rest
+#super + d
+#        python3 /home/a/Workspace/tiler/tiler.py
+super + shift + Left
+        python3 /home/a/Workspace/tiler/tiler.py move left
+super + shift + Right
+        python3 /home/a/Workspace/tiler/tiler.py move right
+super + shift + Up
+        python3 /home/a/Workspace/tiler/tiler.py move up
+super + shift + Down
+        python3 /home/a/Workspace/tiler/tiler.py move down
+super + control + Left
+        python3 /home/a/Workspace/tiler/tiler.py resize left
+super + control + Right
+        python3 /home/a/Workspace/tiler/tiler.py resize right
+super + control + Up
+        python3 /home/a/Workspace/tiler/tiler.py resize up
+super + control + Down
+        python3 /home/a/Workspace/tiler/tiler.py resize down
+super + Left
+        python3 /home/a/Workspace/tiler/tiler.py focus left
+super + Right
+        python3 /home/a/Workspace/tiler/tiler.py focus right
+super + Up
+        python3 /home/a/Workspace/tiler/tiler.py focus up
+super + Down
+        python3 /home/a/Workspace/tiler/tiler.py focus down
+super + alt + Left
+        python3 /home/a/Workspace/tiler/tiler.py focusTiled left
+super + alt + Right
+        python3 /home/a/Workspace/tiler/tiler.py focusTiled right
+super + alt + Up
+        python3 /home/a/Workspace/tiler/tiler.py focusTiled up
+super + alt + Down
+        python3 /home/a/Workspace/tiler/tiler.py focusTiled down
